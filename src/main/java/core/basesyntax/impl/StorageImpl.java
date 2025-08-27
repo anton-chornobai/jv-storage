@@ -1,7 +1,5 @@
 package core.basesyntax.impl;
 
-import java.util.Objects;
-
 import core.basesyntax.Storage;
 
 public class StorageImpl<K, V> implements Storage<K, V> {
@@ -21,8 +19,14 @@ public class StorageImpl<K, V> implements Storage<K, V> {
     private final Entry<K, V>[] array = (Entry<K, V>[]) new Entry[CAPACITY];
     private int size = 0;
 
-    public boolean keysEqual(K a, K b) {
-        return Objects.equals(a, b);
+    private boolean keysEqual(K a, K b) {
+        if (a == null && b == null) {
+            return true;
+        }
+        if (a == null || b == null) {
+            return false;
+        }
+        return a.equals(b);
     }
 
     @Override
